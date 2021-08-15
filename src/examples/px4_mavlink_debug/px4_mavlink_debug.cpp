@@ -53,7 +53,10 @@
 #include <uORB/topics/debug_vect.h>
 #include <uORB/topics/debug_array.h>
 
+#include <drivers/distance_sensor/tfmini/TFMINI.hpp>
+
 extern "C" __EXPORT int px4_mavlink_debug_main(int argc, char *argv[]);
+
 
 int px4_mavlink_debug_main(int argc, char *argv[])
 {
@@ -96,7 +99,8 @@ int px4_mavlink_debug_main(int argc, char *argv[])
 		orb_publish(ORB_ID(debug_key_value), pub_dbg_key, &dbg_key);
 
 		/* send one indexed value */
-		dbg_ind.value = 0.5f * value_counter;
+		// dbg_ind.value = 0.5f * value_counter;
+		dbg_ind.value = TFMINI::mydebug2;
 		dbg_ind.timestamp = timestamp_us;
 		orb_publish(ORB_ID(debug_value), pub_dbg_ind, &dbg_ind);
 
@@ -115,10 +119,13 @@ int px4_mavlink_debug_main(int argc, char *argv[])
 		dbg_array.timestamp = timestamp_us;
 		orb_publish(ORB_ID(debug_array), pub_dbg_array, &dbg_array);
 
-		warnx("sent one more value..");
+		// warnx("sent one more value..");
 
 		value_counter++;
+
 		px4_usleep(500000);
+
+
 	}
 
 	return 0;

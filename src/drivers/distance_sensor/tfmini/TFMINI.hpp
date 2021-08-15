@@ -70,6 +70,8 @@ public:
 
 	void print_info();
 
+    static int mydebug;
+    static int mydebug2;
 private:
 
 	int collect();

@@ -36,6 +36,9 @@
 #include <lib/drivers/device/Device.hpp>
 #include <fcntl.h>
 
+int TFMINI::mydebug = 0;
+int TFMINI::mydebug2 = 0;
+
 TFMINI::TFMINI(const char *port, uint8_t rotation) :
 	ScheduledWorkItem(MODULE_NAME, px4::serial_port_to_wq(port)),
 	_px4_rangefinder(0, rotation)

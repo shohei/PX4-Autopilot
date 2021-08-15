@@ -34,6 +34,7 @@
 #include "PX4Rangefinder.hpp"
 
 #include <lib/drivers/device/Device.hpp>
+#include <drivers/distance_sensor/tfmini/TFMINI.hpp>
 
 PX4Rangefinder::PX4Rangefinder(const uint32_t device_id, const uint8_t device_orientation)
 {
@@ -67,6 +68,8 @@ void PX4Rangefinder::set_orientation(const uint8_t device_orientation)
 
 void PX4Rangefinder::update(const hrt_abstime &timestamp_sample, const float distance, const int8_t quality)
 {
+    TFMINI::mydebug++;
+    
 	distance_sensor_s &report = _distance_sensor_pub.get();
 
 	report.timestamp = timestamp_sample;
